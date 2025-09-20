@@ -29,7 +29,6 @@ export default async function Layout({
             backgroundColor: 'beige',
             height: '64px',
             color: 'black',
-            width: '100%',
           }}
         />
         <div>

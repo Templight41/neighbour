@@ -66,7 +66,7 @@ export function Chat({
   const [showCreditCardAlert, setShowCreditCardAlert] = useState(false);
   const [currentModelId, setCurrentModelId] = useState(initialChatModel);
   const currentModelIdRef = useRef(currentModelId);
-  
+
   useEffect(() => {
     currentModelIdRef.current = currentModelId;
   }, [currentModelId]);
@@ -157,7 +157,10 @@ export function Chat({
 
   return (
     <>
-      <div className="overscroll-behavior-contain flex h-dvh min-w-0 touch-pan-y flex-col bg-background">
+      <div
+        style={{ height: 'calc(100svh - 64px)', top: '64px' }}
+        className="overscroll-behavior-contain flex min-w-0 touch-pan-y flex-col bg-background"
+      >
         <ChatHeader
           chatId={id}
           selectedVisibilityType={initialVisibilityType}

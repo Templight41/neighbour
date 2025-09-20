@@ -62,6 +62,7 @@ export default async function RootLayout({
       // https://github.com/pacocoursey/next-themes?tab=readme-ov-file#with-app
       suppressHydrationWarning
       className={`${geist.variable} ${geistMono.variable}`}
+      style={{ overflow: 'clip' }}
     >
       <head>
         <script
