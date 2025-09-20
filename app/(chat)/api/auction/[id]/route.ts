@@ -6,7 +6,7 @@ const data = {
     price: '₹120',
     description: 'Beautiful antique vase with intricate patterns',
     manufacturer: 'Indie studio',
-    imageUrl: 'https://m.media-amazon.com/images/I/610CnMEepWL.jpg',
+    imageUrl: ['https://m.media-amazon.com/images/I/610CnMEepWL.jpg','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHNzC8ZBKzNKRQKJqBi3ilnR3HfRmtmT6SnA&s'],
     manufacturerUrl: 'https://assets.astaguru.com/walter_langhammer.jpg',
     manufacturerDetails: {
       location: 'India',
@@ -31,7 +31,7 @@ const data = {
       location: 'India',
       established: 2010,
       description:
-        'Indie studio is a small studio that makes small things for small people.',
+        'Indie studio is a small studio that makes small things for small people.Indie studio is a small studio that makes small things for small people.Indie studio is a small studio that makes small things for small people.Indie studio is a small studio that makes small things for small people.Indie studio is a small studio that makes small things for small people.Indie studio is a small studio that makes small things for small people.Indie studio is a small studio that makes small things for small people.Indie studio is a small studio that makes small things for small people.Indie studio is a small studio that makes small things for small people.Indie studio is a small studio that makes small things for small people.Indie studio is a small studio that makes small things for small people.Indie studio is a small studio that makes small things for small people.Indie studio is a small studio that makes small things for small people.Indie studio is a small studio that makes small things for small people.Indie studio is a small studio that makes small things for small people.Indie studio is a small studio that makes small things for small people.Indie studio is a small studio that makes small things for small people.Indie studio is a small studio that makes small things for small people.',
     },
     timeForEnd: '2025-09-30T20:30:00Z',
     currentBid: 105,

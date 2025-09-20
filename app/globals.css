@@ -542,7 +542,8 @@ input:checked + .slider:before {
   flex-direction: column;
   width: 100%;
   max-width: 1280px;
-  margin: 0 auto;
+  margin: 50px auto;
+  margin-left : 400px;
   padding: 2.5rem 1.25rem 2.25rem 1.25rem;
   gap: 1.25rem;
 }
@@ -594,6 +595,7 @@ input:checked + .slider:before {
   letter-spacing: 0.13375rem;
   color: #231F20;
   margin-bottom: 0.8125rem;
+  overflow-wrap: break-word;
   margin-top: 0;
 }
 

@@ -9,7 +9,7 @@ type AuctionItem = {
   id: string;
   name: string;
   price: string;
-  imageUrl?: string;
+  imageUrl?: string | string[];
   description?: string;
   manufacturer?: string;
 };
