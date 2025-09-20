@@ -3,7 +3,7 @@
 import React from 'react';
 
 
-const RaiseBidButton = ({ currentBid }: { currentBid: string }) => {
+const RaiseBidButton = ({ currentBid, vis }: { currentBid: string, vis: boolean }) => {
   // const handleClick = () => {
   //   console.log("raised");
   //   if (onRaiseBid) {

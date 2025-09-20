@@ -101,7 +101,7 @@ export default function AuctionDetailPage({ params }: AuctionDetailPageProps) {
           manufacturer={item?.manufacturer}
         />
 
-        <RaiseBidButton currentBid={item?.currentBid?.toString() || '0'} />
+        {/* <RaiseBidButton currentBid={item?.currentBid?.toString() || '0'} /> */}
       </div>
     )
   );

@@ -518,6 +518,25 @@ input:checked + .slider:before {
   margin-top: 0.25rem;
 }
 
+.RaiseBidArea
+{
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  text-align: center; 
+}
+
+.RaiseBidBox
+{
+  border : 1px solid #3E2723;
+  border-radius:0.4rem;
+}
+
+.RaiseBidButton
+{
+  justify-self: start;
+}
+
 .ManufacturerOuter {
   display: flex;
   flex-direction: column;
