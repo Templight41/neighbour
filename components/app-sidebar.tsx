@@ -23,7 +23,10 @@ export function AppSidebar({ user }: { user: User | undefined }) {
   const { setOpenMobile } = useSidebar();
 
   return (
-    <Sidebar className="group-data-[side=left]:border-r-0">
+    <Sidebar
+      style={{ height: 'calc(100svh - 64px)', top: '64px' }}
+      className="group-data-[side=left]:border-r-0"
+    >
       <SidebarHeader>
         <SidebarMenu>
           <div className="flex flex-row items-center justify-between">

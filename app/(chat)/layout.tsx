@@ -5,6 +5,7 @@ import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { auth } from '../(auth)/auth';
 import Script from 'next/script';
 import { DataStreamProvider } from '@/components/data-stream-provider';
+import AppHeader from '@/components/app-header';
 
 export const experimental_ppr = true;
 
@@ -23,10 +24,20 @@ export default async function Layout({
         strategy="beforeInteractive"
       />
       <DataStreamProvider>
-        <SidebarProvider defaultOpen={!isCollapsed}>
-          <AppSidebar user={session?.user} />
-          <SidebarInset>{children}</SidebarInset>
-        </SidebarProvider>
+        <AppHeader
+          style={{
+            backgroundColor: 'beige',
+            height: '64px',
+            color: 'black',
+            width: '100%',
+          }}
+        />
+        <div>
+          <SidebarProvider defaultOpen={!isCollapsed}>
+            <AppSidebar user={session?.user} />
+            <SidebarInset>{children}</SidebarInset>
+          </SidebarProvider>
+        </div>
       </DataStreamProvider>
     </>
   );
