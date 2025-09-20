@@ -1,12 +1,20 @@
 import React from 'react';
 import RaiseBidButton from '@/components/raise-bid-button';
-import { useState} from 'react';
+import { useState } from 'react';
 
 
-const ItemContainer = ({name, manufacturer, imageUrl, price, currentBid, timeForEnd, description}) => {
+const ItemContainer = ({name, manufacturer, imageUrl, price, currentBid, timeForEnd, description, auctionId}) => {
 
-  const [BidAmount , setBidAmount] = useState(currentBid);
   const [Vis, setVis] = useState(false);
+
+  const handleVisibilityChange = (visible) => {
+    setVis(visible);
+  };
+
+  const handleBidSubmit = (amount) => {
+    console.log(`Bid submitted successfully: ${amount} for ${name}`);
+
+  };
 
   return (
     <div className="OuterContainer">
@@ -36,14 +44,13 @@ const ItemContainer = ({name, manufacturer, imageUrl, price, currentBid, timeFor
             <p className="TimeRemaining">Until auction ends</p>
           </div>
             <div className = "RaiseBidButton">
-              <RaiseBidButton currentBid={currentBid} vis={Vis} />
-            </div>
-            <div className ="RaiseBidArea">
-
-            <form className = "RaiseBidForm">
-              <input type="text" placeholder={currentBid} className = "RaiseBidBox"></input>
-            </form>
-
+              <RaiseBidButton 
+                currentBid={currentBid} 
+                vis={Vis} 
+                onVisibilityChange={handleVisibilityChange}
+                onBidSubmit={handleBidSubmit}
+                auctionId={auctionId}
+              />
             </div>
         </div>
       </article>

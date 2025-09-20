@@ -62,6 +62,7 @@ export default function AuctionDetailPage({ params }: AuctionDetailPageProps) {
           currentBid={item?.currentBid}
           timeForEnd={item?.timeForEnd}
           description={item?.description}
+          auctionId={id}
         />
 
         <div
