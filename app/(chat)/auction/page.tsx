@@ -43,8 +43,11 @@ export default function AuctionListPage() {
           gap: '32px',
           padding: '48px 64px',
           maxWidth: '1400px',
+          boxSizing: 'border-box',
           margin: '0 auto',
           justifyContent: 'center',
+          // height: 'calc(100svh - 64px)',
+          // top: '64px',
         }}
       >
         {items.map((item) => (

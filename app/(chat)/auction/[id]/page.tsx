@@ -46,7 +46,13 @@ export default function AuctionDetailPage({ params }: AuctionDetailPageProps) {
 
   return (
     item && (
-      <div style={{ overflowY: 'auto' }}>
+      <div
+        style={{
+          overflowY: 'auto',
+          height: 'calc(100svh - 64px)',
+          top: '64px',
+        }}
+      >
         {/* <HeaderBar title="The Hello Neighbour Auction" /> */}
         <ItemContainer
           name={item?.name}
