@@ -18,7 +18,7 @@ const headerBar = ({ title }) => (
     <h1
       style={{
         textAlign: 'center',
-        fontFamily: "'Whisper', serif",
+        fontFamily: "serif",
         fontSize: '3.0rem',
         fontWeight: 600,
         color: '#3E2723',

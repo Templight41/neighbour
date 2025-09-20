@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import AuctionCard from '@/components/auction-card';
-import HeaderBar from '@/components/header';
+// import HeaderBar from '@/components/header';
 
 type AuctionItem = {
   id: string;
