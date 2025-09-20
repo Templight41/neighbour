@@ -13,76 +13,76 @@
 
 /* define design tokens (light mode) */
 :root {
-  --background: hsl(0 0% 100%);
-  --foreground: hsl(240 10% 3.9%);
-  --card: hsl(0 0% 100%);
-  --card-foreground: hsl(240 10% 3.9%);
-  --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(240 10% 3.9%);
-  --primary: hsl(240 5.9% 10%);
-  --primary-foreground: hsl(0 0% 98%);
-  --secondary: hsl(240 4.8% 95.9%);
-  --secondary-foreground: hsl(240 5.9% 10%);
-  --muted: hsl(240 4.8% 95.9%);
-  --muted-foreground: hsl(240 3.8% 46.1%);
-  --accent: hsl(240 4.8% 95.9%);
-  --accent-foreground: hsl(240 5.9% 10%);
+  --background: hsl(42 50% 96%); /* #FAF7F0 - paper white */
+  --foreground: hsl(16 29% 19%); /* #3E2723 - deep brown */
+  --card: hsl(46 52% 94%); /* #F7F3E9 - cream */
+  --card-foreground: hsl(16 29% 19%); /* #3E2723 - deep brown */
+  --popover: hsl(42 50% 96%); /* #FAF7F0 - paper white */
+  --popover-foreground: hsl(16 29% 19%); /* #3E2723 - deep brown */
+  --primary: hsl(30 23% 44%); /* #8B7355 - coffee */
+  --primary-foreground: hsl(42 50% 96%); /* #FAF7F0 - paper white */
+  --secondary: hsl(38 30% 87%); /* #E8DCC6 - warm beige */
+  --secondary-foreground: hsl(16 29% 19%); /* #3E2723 - deep brown */
+  --muted: hsl(42 26% 76%); /* #D4C4A8 - dark beige */
+  --muted-foreground: hsl(27 20% 37%); /* #6B5B47 - dark coffee */
+  --accent: hsl(43 84% 38%); /* #B8860B - accent gold */
+  --accent-foreground: hsl(42 50% 96%); /* #FAF7F0 - paper white */
   --destructive: hsl(0 84.2% 60.2%);
   --destructive-foreground: hsl(0 0% 98%);
-  --border: hsl(240 5.9% 90%);
-  --input: hsl(240 5.9% 90%);
-  --ring: hsl(240 10% 3.9%);
-  --chart-1: hsl(12 76% 61%);
-  --chart-2: hsl(173 58% 39%);
-  --chart-3: hsl(197 37% 24%);
-  --chart-4: hsl(43 74% 66%);
-  --chart-5: hsl(27 87% 67%);
-  --sidebar-background: hsl(0 0% 98%);
-  --sidebar-foreground: hsl(240 5.3% 26.1%);
-  --sidebar-primary: hsl(240 5.9% 10%);
-  --sidebar-primary-foreground: hsl(0 0% 98%);
-  --sidebar-accent: hsl(240 4.8% 95.9%);
-  --sidebar-accent-foreground: hsl(240 5.9% 10%);
-  --sidebar-border: hsl(220 13% 91%);
-  --sidebar-ring: hsl(217.2 91.2% 59.8%);
+  --border: hsl(38 30% 87%); /* #E8DCC6 - warm beige */
+  --input: hsl(38 30% 87%); /* #E8DCC6 - warm beige */
+  --ring: hsl(30 23% 44%); /* #8B7355 - coffee */
+  --chart-1: hsl(30 23% 44%); /* coffee */
+  --chart-2: hsl(43 84% 38%); /* accent gold */
+  --chart-3: hsl(27 20% 37%); /* dark coffee */
+  --chart-4: hsl(38 30% 87%); /* warm beige */
+  --chart-5: hsl(42 26% 76%); /* dark beige */
+  --sidebar-background: hsl(46 52% 94%); /* #F7F3E9 - cream */
+  --sidebar-foreground: hsl(16 29% 19%); /* #3E2723 - deep brown */
+  --sidebar-primary: hsl(30 23% 44%); /* #8B7355 - coffee */
+  --sidebar-primary-foreground: hsl(42 50% 96%); /* #FAF7F0 - paper white */
+  --sidebar-accent: hsl(38 30% 87%); /* #E8DCC6 - warm beige */
+  --sidebar-accent-foreground: hsl(16 29% 19%); /* #3E2723 - deep brown */
+  --sidebar-border: hsl(42 26% 76%); /* #D4C4A8 - dark beige */
+  --sidebar-ring: hsl(43 84% 38%); /* #B8860B - accent gold */
   /* border radius unit */
   --radius: 0.5rem;
 }
 
 /* define design tokens (dark mode) */
 .dark {
-  --background: hsl(240 10% 3.9%);
-  --foreground: hsl(0 0% 98%);
-  --card: hsl(240 10% 3.9%);
-  --card-foreground: hsl(0 0% 98%);
-  --popover: hsl(240 10% 3.9%);
-  --popover-foreground: hsl(0 0% 98%);
-  --primary: hsl(0 0% 98%);
-  --primary-foreground: hsl(240 5.9% 10%);
-  --secondary: hsl(240 3.7% 15.9%);
-  --secondary-foreground: hsl(0 0% 98%);
-  --muted: hsl(240 3.7% 15.9%);
-  --muted-foreground: hsl(240 5% 64.9%);
-  --accent: hsl(240 3.7% 15.9%);
-  --accent-foreground: hsl(0 0% 98%);
-  --destructive: hsl(0 62.8% 30.6%);
-  --destructive-foreground: hsl(0 0% 98%);
-  --border: hsl(240 3.7% 15.9%);
-  --input: hsl(240 3.7% 15.9%);
-  --ring: hsl(240 4.9% 83.9%);
-  --chart-1: hsl(220 70% 50%);
-  --chart-2: hsl(160 60% 45%);
-  --chart-3: hsl(30 80% 55%);
-  --chart-4: hsl(280 65% 60%);
-  --chart-5: hsl(340 75% 55%);
-  --sidebar-background: hsl(240 5.9% 10%);
-  --sidebar-foreground: hsl(240 4.8% 95.9%);
-  --sidebar-primary: hsl(224.3 76.3% 48%);
-  --sidebar-primary-foreground: hsl(0 0% 100%);
-  --sidebar-accent: hsl(240 3.7% 15.9%);
-  --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
-  --sidebar-border: hsl(240 3.7% 15.9%);
-  --sidebar-ring: hsl(217.2 91.2% 59.8%);
+  --background: hsl(25 20% 11%); /* #1F1814 - dark espresso */
+  --foreground: hsl(37 24% 85%); /* #E3D7C3 - parchment */
+  --card: hsl(25 18% 14%); /* #2A211A - dark mocha */
+  --card-foreground: hsl(37 24% 85%); /* #E3D7C3 - parchment */
+  --popover: hsl(25 18% 14%); /* #2A211A - dark mocha */
+  --popover-foreground: hsl(37 24% 85%); /* #E3D7C3 - parchment */
+  --primary: hsl(35 45% 65%); /* #C9A66B - warm sand */
+  --primary-foreground: hsl(25 20% 11%); /* #1F1814 - dark espresso */
+  --secondary: hsl(28 15% 25%); /* #4A3F36 - cocoa */
+  --secondary-foreground: hsl(37 24% 85%); /* #E3D7C3 - parchment */
+  --muted: hsl(25 12% 35%); /* #5A4E45 - muted brown */
+  --muted-foreground: hsl(36 20% 70%); /* #C4B5A0 - light sand */
+  --accent: hsl(43 65% 55%); /* #D4A943 - antique gold */
+  --accent-foreground: hsl(25 20% 11%); /* #1F1814 - dark espresso */
+  --destructive: hsl(0 50% 45%); /* warmer red */
+  --destructive-foreground: hsl(37 24% 85%); /* #E3D7C3 - parchment */
+  --border: hsl(28 15% 25%); /* #4A3F36 - cocoa */
+  --input: hsl(28 15% 25%); /* #4A3F36 - cocoa */
+  --ring: hsl(35 45% 65%); /* #C9A66B - warm sand */
+  --chart-1: hsl(35 45% 65%); /* warm sand */
+  --chart-2: hsl(43 65% 55%); /* antique gold */
+  --chart-3: hsl(25 12% 35%); /* muted brown */
+  --chart-4: hsl(28 15% 25%); /* cocoa */
+  --chart-5: hsl(36 20% 70%); /* light sand */
+  --sidebar-background: hsl(25 18% 14%); /* #2A211A - dark mocha */
+  --sidebar-foreground: hsl(37 24% 85%); /* #E3D7C3 - parchment */
+  --sidebar-primary: hsl(35 45% 65%); /* #C9A66B - warm sand */
+  --sidebar-primary-foreground: hsl(25 20% 11%); /* #1F1814 - dark espresso */
+  --sidebar-accent: hsl(28 15% 25%); /* #4A3F36 - cocoa */
+  --sidebar-accent-foreground: hsl(37 24% 85%); /* #E3D7C3 - parchment */
+  --sidebar-border: hsl(25 12% 35%); /* #5A4E45 - muted brown */
+  --sidebar-ring: hsl(43 65% 55%); /* #D4A943 - antique gold */
 }
 
 /* define theme */
@@ -293,4 +293,321 @@
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.OuterContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .OuterContainer {
+    flex-direction: row;
+    gap: 2rem;
+  }
+}
+
+.Image {
+  width: 100%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+@media (min-width: 1024px) {
+  .Image {
+    width: 50%;
+  }
+}
+
+.Image img {
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #FAF7F0;
+}
+
+@media (min-width: 640px) {
+  .Image img {
+    height: 278px;
+  }
+}
+
+@media (min-width: 768px) {
+  .Image img {
+    height: 400px;
+  }
+}
+
+.Details {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .Details {
+    width: 50%;
+  }
+}
+
+.ItemDetails {
+  margin-bottom: 1.5rem;
+}
+
+.ItemDetails h1 {
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #231F20;
+}
+
+@media (min-width: 1024px) {
+  .ItemDetails h1 {
+    font-size: 2.5rem;
+    line-height: 1.25;
+  }
+}
+
+.ItemDetails h3 {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.25;
+  color: #231F20;
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 1024px) {
+  .ItemDetails h3 {
+    font-size: 1.125rem;
+  }
+}
+
+.ItemDetails h4 {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.25;
+  color: #231F20;
+}
+
+.Divider {
+  margin: 1.5rem 0;
+  border-bottom: 2px solid #EAEAEA;
+}
+
+.BidSection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: space-evenly;
+  margin-top: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .BidSection {
+    margin-top: 2rem;
+  }
+}
+
+.BidItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.BidLabel {
+  margin-bottom: 0.125rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.09375rem;
+  color: #A2A2A2;
+}
+
+@media (min-width: 1024px) {
+  .BidLabel {
+    font-size: 1.125rem;
+  }
+}
+
+.BidValue {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #231F20;
+}
+
+@media (min-width: 1024px) {
+  .BidValue {
+    font-size: 1.25rem;
+  }
+}
+
+.TimeRemaining {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #979797;
+  margin-top: 0.25rem;
+}
+
+.ManufacturerOuter {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 2.25rem 1.25rem;
+  gap: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  .ManufacturerOuter {
+    flex-direction: row;
+    gap: 2.5rem;
+    padding: 3.125rem 1.25rem;
+  }
+}
+
+.ManufacturerOuter .Image {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+@media (min-width: 1024px) {
+  .ManufacturerOuter .Image {
+    width: 25%;
+  }
+}
+
+.ManufacturerOuter .Image img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+  background-color: #FAF7F0;
+}
+
+.ManufacturerOuter .Details {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+  .ManufacturerOuter .Details {
+    width: 75%;
+  }
+}
+
+.ManufacturerDetails h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 2.3125rem;
+  letter-spacing: 0.13375rem;
+  color: #231F20;
+  margin-bottom: 0.8125rem;
+  margin-top: 0;
+}
+
+.ManufacturerDetails h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 1.875rem;
+  color: #231F20;
+  margin-bottom: 1.3125rem;
+  margin-top: 0;
+}
+
+.ManufacturerDetails h3 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.625rem;
+  color: #231F20;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+}
+
+.ManufacturerDetails h4 {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.625rem;
+  color: #231F20;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+  max-height: 254px;
+  overflow-y: auto;
+}
+
+.ManufacturerDetails h4:last-of-type {
+  margin-bottom: 0;
 }

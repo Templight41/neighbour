@@ -136,7 +136,10 @@ const PurePreviewMessage = ({
                       })}
                       style={
                         message.role === 'user'
-                          ? { backgroundColor: '#006cff' }
+                          ? {
+                              backgroundColor: 'var(--color-accent)',
+                              color: 'var(--color-accent-foreground)',
+                            }
                           : undefined
                       }
                     >

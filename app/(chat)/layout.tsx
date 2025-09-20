@@ -16,6 +16,7 @@ export default async function Layout({
 }) {
   const [session, cookieStore] = await Promise.all([auth(), cookies()]);
   const isCollapsed = cookieStore.get('sidebar:state')?.value !== 'true';
+  const isAuction = cookieStore.get('auction:state')?.value === 'true';
 
   return (
     <>
@@ -24,15 +25,9 @@ export default async function Layout({
         strategy="beforeInteractive"
       />
       <DataStreamProvider>
-        <AppHeader
-          style={{
-            backgroundColor: 'beige',
-            height: '64px',
-            color: 'black',
-          }}
-        />
+        <AppHeader style={{}} />
         <div>
-          <SidebarProvider defaultOpen={!isCollapsed}>
+          <SidebarProvider defaultOpen={!isCollapsed && !isAuction}>
             <AppSidebar user={session?.user} />
             <SidebarInset>{children}</SidebarInset>
           </SidebarProvider>
