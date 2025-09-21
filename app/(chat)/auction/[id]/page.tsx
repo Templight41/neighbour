@@ -10,7 +10,7 @@ type AuctionItem = {
   id: string;
   name: string;
   price: string;
-  imageUrl?: string;
+  imageUrl?: string | string[];
   description?: string;
   currentBid?: number;
   timeForEnd?: string;
@@ -62,6 +62,7 @@ export default function AuctionDetailPage({ params }: AuctionDetailPageProps) {
           currentBid={item?.currentBid}
           timeForEnd={item?.timeForEnd}
           description={item?.description}
+          auctionId={id}
         />
 
         <div
@@ -101,7 +102,7 @@ export default function AuctionDetailPage({ params }: AuctionDetailPageProps) {
           manufacturer={item?.manufacturer}
         />
 
-        <RaiseBidButton currentBid={item?.currentBid?.toString() || '0'} />
+        {/* <RaiseBidButton currentBid={item?.currentBid?.toString() || '0'} /> */}
       </div>
     )
   );

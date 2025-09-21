@@ -109,7 +109,7 @@ const AuctionCard = ({ imageUrl, price, name, description,manufacturer }) => (
       }}
     >
       <img
-        src={imageUrl}
+        src={Array.isArray(imageUrl) ? imageUrl[0] : imageUrl}
         alt={name}
         style={{
           width: '100%',
