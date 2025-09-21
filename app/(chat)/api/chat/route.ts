@@ -26,7 +26,6 @@ import { requestSuggestions } from '@/lib/ai/tools/request-suggestions';
 import { getWeather } from '@/lib/ai/tools/get-weather';
 import { generateCaption } from '@/lib/ai/tools/generate-caption';
 import { findIndianExpos } from '@/lib/ai/tools/find-indian-expos';
-import { google } from '@ai-sdk/google';
 import { isProductionEnvironment } from '@/lib/constants';
 import { myProvider } from '@/lib/ai/providers';
 import { entitlementsByUserType } from '@/lib/ai/entitlements';
@@ -46,6 +45,8 @@ import { fetchModels } from 'tokenlens/fetch';
 import { getUsage } from 'tokenlens/helpers';
 import type { ModelCatalog } from 'tokenlens/core';
 import type { AppUsage } from '@/lib/usage';
+import { getManufacturerByUserId } from '@/lib/db/firestore-queries';
+import { getManufacturer, setManufacturer } from '@/lib/ai/tools/manufacturer';
 
 export const maxDuration = 60;
 
@@ -110,11 +111,30 @@ export async function POST(request: Request) {
       selectedVisibilityType: VisibilityType;
     } = requestBody;
 
+    console.log('message', message);
+
     const session = await auth();
 
     if (!session?.user) {
       return new ChatSDKError('unauthorized:chat').toResponse();
     }
+
+    const isImageMessage = message.parts.some((part) => part.type === 'file');
+
+    const imageUrlArr = message.parts
+      .filter((part) => part.type === 'file')
+      .map((part) => part.url);
+
+    message.parts.map((part) => {
+      if (part.type === 'text') {
+        part.text =
+          part.text +
+          (isImageMessage
+            ? `\n\n<Images><url>${imageUrlArr.join(imageUrlArr.length > 1 ? '</url><url>' : '')}</url></Images>`
+            : '');
+      }
+      return part;
+    });
 
     const userType: UserType = session.user.type;
 
@@ -145,6 +165,9 @@ export async function POST(request: Request) {
         return new ChatSDKError('forbidden:chat').toResponse();
       }
     }
+
+    const isUserInfoLogged =
+      (await getManufacturerByUserId(session.user.id)) !== undefined;
 
     const messagesFromDb = await getMessagesByChatId({ id });
     const uiMessages = [...convertToUIMessages(messagesFromDb), message];
@@ -180,32 +203,37 @@ export async function POST(request: Request) {
       execute: ({ writer: dataStream }) => {
         const result = streamText({
           model: myProvider.languageModel(selectedChatModel),
-          system: systemPrompt({ selectedChatModel, requestHints }),
+          system: systemPrompt({
+            selectedChatModel,
+            requestHints,
+            isUserInfoLogged,
+          }),
           messages: convertToModelMessages(uiMessages),
           stopWhen: stepCountIs(5),
           experimental_activeTools:
             selectedChatModel === 'chat-model-reasoning'
               ? []
-              : [
-                  'getWeather',
-                  'createDocument',
-                  'updateDocument',
-                  'requestSuggestions',
-                  'generateCaption',
-                  'findIndianExpos',
-                ],
+              : isUserInfoLogged
+                ? [
+                    'getWeather',
+                    'generateCaption',
+                    'findIndianExpos',
+                    'setManufacturer',
+                    'getManufacturer',
+                  ]
+                : ['setManufacturer', 'getManufacturer'],
           experimental_transform: smoothStream({ chunking: 'word' }),
-          tools: {
-            getWeather,
-            createDocument: createDocument({ session, dataStream }),
-            updateDocument: updateDocument({ session, dataStream }),
-            requestSuggestions: requestSuggestions({
-              session,
-              dataStream,
-            }),
-            generateCaption,
-            findIndianExpos,
-          },
+          tools: isUserInfoLogged
+            ? {
+                getWeather,
+                generateCaption,
+                findIndianExpos,
+                setManufacturer,
+                getManufacturer,
+              }
+            : {
+                setManufacturer,
+              },
           experimental_telemetry: {
             isEnabled: isProductionEnvironment,
             functionId: 'stream-text',
@@ -217,13 +245,19 @@ export async function POST(request: Request) {
                 myProvider.languageModel(selectedChatModel).modelId;
               if (!modelId) {
                 finalMergedUsage = usage;
-                dataStream.write({ type: 'data-usage', data: finalMergedUsage });
+                dataStream.write({
+                  type: 'data-usage',
+                  data: finalMergedUsage,
+                });
                 return;
               }
 
               if (!providers) {
                 finalMergedUsage = usage;
-                dataStream.write({ type: 'data-usage', data: finalMergedUsage });
+                dataStream.write({
+                  type: 'data-usage',
+                  data: finalMergedUsage,
+                });
                 return;
               }
 

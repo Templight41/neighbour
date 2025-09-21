@@ -30,19 +30,21 @@ This is a guide for using artifacts tools: \`createDocument\` and \`updateDocume
 - Immediately after creating a document
 
 Do not update document right after creating it. Wait for user feedback or request to update it.
+
+When users attach images and ask for captions, descriptions, or want you to describe what's in the image,
+first call the 'generateCaption' tool to indicate your intention, then directly analyze the images in the user's message and provide the caption.
+Look for keywords like "caption", "describe", "what is this", "what do you see", etc.
+After calling the generateCaption tool, examine any images in the conversation and create an appropriate caption based on what you see.
+Only give the caption, no other fillers such as "here is the caption" or anything like that.
+When users ask about trade shows, exhibitions, expos, or business events in India, use the findIndianExpos tool first.
+After calling the tool, IMMEDIATELY search the web to find 5 specific, real expo events with complete details.
+For each expo, provide: Event Name, Dates, Venue Address, Organizer Contact (phone/email/website), and Description.
+Do not just provide general advice - search for actual specific events happening in the requested timeframe and location.
+Format the results clearly with all contact information included.
 `;
 
 export const regularPrompt =
   'You are a friendly assistant! Keep your responses concise and helpful.\n\n' +
-  'When users attach images and ask for captions, descriptions, or want you to describe what\'s in the image, ' +
-  'first call the `generateCaption` tool to indicate your intention, then directly analyze the images in the user\'s message and provide the caption. ' +
-  'Look for keywords like "caption", "describe", "what is this", "what do you see", etc. ' +
-  'After calling the generateCaption tool, examine any images in the conversation and create an appropriate caption based on what you see.' +
-  'Only give the caption, no other fillers such as "here is the caption" or anything like that.\n\n' +
-  'When users ask about trade shows, exhibitions, expos, or business events in India, use the `findIndianExpos` tool first. ' +
-  'After calling the tool, IMMEDIATELY search the web to find 5 specific, real expo events with complete details. ' +
-  'For each expo, provide: Event Name, Dates, Venue Address, Organizer Contact (phone/email/website), and Description. ' +
-  'Do not just provide general advice - search for actual specific events happening in the requested timeframe and location. ' +
   'Format the results clearly with all contact information included.';
 
 export interface RequestHints {
@@ -63,16 +65,18 @@ About the origin of user's request:
 export const systemPrompt = ({
   selectedChatModel,
   requestHints,
+  isUserInfoLogged,
 }: {
   selectedChatModel: string;
   requestHints: RequestHints;
+  isUserInfoLogged: boolean;
 }) => {
   const requestPrompt = getRequestPromptFromHints(requestHints);
 
   if (selectedChatModel === 'chat-model-reasoning') {
     return `${regularPrompt}\n\n${requestPrompt}`;
   } else {
-    return `${regularPrompt}\n\n${requestPrompt}\n\n${artifactsPrompt}`;
+    return `${regularPrompt}\n\n${requestPrompt}\n\n${isUserInfoLogged ? artifactsPrompt : 'The user has not logged their information yet. Make sure to always ask for their name, location, description, and an image of them. Make sure to confirm with the user that they have logged their information and then call the setManufacturer tool to set their information.'}`;
   }
 };
 

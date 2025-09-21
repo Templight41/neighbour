@@ -141,7 +141,7 @@ export async function GET(
         description: manufacturer?.description ?? '',
         manufacturerUrl: manufacturer?.manufacturerUrl ?? '',
       },
-      currentBid: highestBid ?? item?.price ?? 0,
+      currentBid: highestBid || item?.price || 0,
     };
 
     // console.log(item);

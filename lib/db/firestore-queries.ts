@@ -261,12 +261,13 @@ export async function getManufacturerByUserId(userId: string) {
     const manufacturerSnapshot = await getDocs(q);
 
     if (manufacturerSnapshot.empty) {
-      return null;
+      return undefined;
     }
 
     // Return the first matching manufacturer
     return manufacturerSnapshot.docs[0].data() as ManufacturerRef;
   } catch (error) {
+    console.error('Error getting manufacturer by user id:', error);
     return null;
   }
 }
