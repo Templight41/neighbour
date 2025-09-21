@@ -33,7 +33,12 @@ Do not update document right after creating it. Wait for user feedback or reques
 `;
 
 export const regularPrompt =
-  'You are a friendly assistant! Keep your responses concise and helpful.';
+  'You are a friendly assistant! Keep your responses concise and helpful.\n\n' +
+  'When users attach images and ask for captions, descriptions, or want you to describe what\'s in the image, ' +
+  'first call the `generateCaption` tool to indicate your intention, then directly analyze the images in the user\'s message and provide the caption. ' +
+  'Look for keywords like "caption", "describe", "what is this", "what do you see", etc. ' +
+  'After calling the generateCaption tool, examine any images in the conversation and create an appropriate caption based on what you see.' +
+  'Only give the caption, no other fillers such as "here is the caption" or anything like that';
 
 export interface RequestHints {
   latitude: Geo['latitude'];
