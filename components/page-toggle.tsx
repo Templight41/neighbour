@@ -13,10 +13,13 @@ export default function PageToggle() {
   console.log(isChecked);
 
   const handleCheckboxChange = () => {
+    if (pathname.includes('/profile'))
+      return router.push(isChecked ? '/auction' : '/');
     setIsChecked(!isChecked);
   };
 
   useEffect(() => {
+    if (pathname.includes('/profile')) return;
     if (isChecked) {
       if (pathname.includes('/auction')) return;
       router.push('/auction');
@@ -27,6 +30,7 @@ export default function PageToggle() {
   }, [isChecked]);
 
   useEffect(() => {
+    if (pathname.includes('/profile')) return;
     if (pathname.includes('/auction')) {
       setIsChecked(true);
     } else {

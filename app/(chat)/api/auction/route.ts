@@ -1,11 +1,96 @@
-import { NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from 'next/server';
+import app from '@/lib/db/firestore';
+import {
+  addDoc,
+  collection,
+  getDocs,
+  getDoc,
+  getFirestore,
+  writeBatch,
+  doc,
+  limit,
+  startAfter,
+  orderBy,
+  query,
+} from 'firebase/firestore';
+import {
+  createItem,
+  createMultipleItems,
+  getItemsByLimit,
+} from '@/lib/db/firestore-queries';
 
-export async function GET() {
-  return NextResponse.json([
-    { id: "1", name: "Antique Vase", price: "₹120" ,"imageUrl":"https://m.media-amazon.com/images/I/610CnMEepWL.jpg",manufacturer :"Indie studio"},
-    { id: "2", name: "Rare Coin", price: "₹90" ,"imageUrl":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRraioFPrd6TdDj8l8eWT8NeyINr1s_RCoGfA&s",manufacturer :"Indie studio"},
-    { id: "3", name: "Old Painting", price: "₹200" ,"imageUrl":"https://harpersbazaaruk.cdnds.net/17/04/4000x2000/gallery-1485277925-slide-3cover.jpg",manufacturer :"Indie studio"},
-    { id: "4", name: "Sweater", price: "₹300" ,"imageUrl":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMwrAVaHYjY-uKmMjBLFgO8nP4gD_7DEWGYA&s",manufacturer :"Indie studio"},
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = request.nextUrl;
+    const limitCount = Number.parseInt(searchParams.get('limit') || '10');
+    const startAfterDoc = searchParams.get('start'); // Document ID to start after
 
-  ]);
+    const items = await getItemsByLimit(limitCount, startAfterDoc);
+
+    if (!items) {
+      throw new Error('Failed to fetch items');
+    }
+
+    return NextResponse.json({
+      data: items,
+      count: items.length,
+      success: true,
+    });
+  } catch (error) {
+    console.error('Error fetching items:', error);
+    return NextResponse.json(
+      {
+        error: 'Failed to fetch items',
+        success: false,
+        details: error instanceof Error ? error.message : 'Unknown error',
+      },
+      { status: 500 },
+    );
+  }
+}
+
+export async function POST(request: NextRequest) {
+  // const session = await auth();
+  // if (!session) {
+  //   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  // }
+
+  try {
+    const body = await request.json();
+
+    if (Array.isArray(body)) {
+      const createdItems = await createMultipleItems(body);
+      if (!createdItems) {
+        throw new Error('Failed to create items');
+      }
+      return NextResponse.json({
+        data: createdItems,
+        count: createdItems.length,
+        success: true,
+      });
+    }
+
+    const createdItems = await createItem(body);
+
+    if (!createdItems) {
+      throw new Error('Failed to add items');
+    }
+
+    return NextResponse.json({
+      data: createdItems,
+      count: 1,
+      success: true,
+    });
+  } catch (error) {
+    console.error('Error creating items:', error);
+
+    return NextResponse.json(
+      {
+        error: 'Failed to create items',
+        success: false,
+        details: error instanceof Error ? error.message : 'Unknown error',
+      },
+      { status: 500 },
+    );
+  }
 }

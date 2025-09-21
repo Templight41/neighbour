@@ -17,6 +17,10 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  if (pathname.startsWith('/api/auction')) {
+    return NextResponse.next();
+  }
+
   const token = await getToken({
     req: request,
     secret: process.env.AUTH_SECRET,
@@ -47,7 +51,7 @@ export const config = {
     '/api/:path*',
     '/login',
     '/register',
-
+    // '/profile',
     /*
      * Match all request paths except for the ones starting with:
      * - _next/static (static files)

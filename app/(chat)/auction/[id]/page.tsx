@@ -38,8 +38,8 @@ export default function AuctionDetailPage({ params }: AuctionDetailPageProps) {
         cache: 'no-store',
       });
       const item = await res.json();
-      console.log(item);
-      setItem(item);
+      console.log(item.data);
+      setItem(item.data);
     };
     fetchItem();
   }, []);

@@ -171,3 +171,48 @@ export const stream = pgTable(
 );
 
 export type Stream = InferSelectModel<typeof stream>;
+
+export interface ItemRef {
+  name: string;
+  manufacturerId: string;
+  price: number;
+  description: string;
+  imageUrl: string[];
+  timeForEnd: string;
+  createdAt: string;
+  updatedAt: string;
+  isSold: boolean;
+}
+
+export interface ItemResRef extends ItemRef {
+  id: string;
+}
+
+export interface AuctionBidRef {
+  id: string;
+  itemId: string;
+  bid: number;
+  userId: string;
+  createdAt: string;
+}
+
+export interface AuctionItemRef extends ItemResRef {
+  manufacturerDetails: {
+    manufacturer: string;
+    location: string;
+    established: number;
+    description: string;
+    manufacturerUrl: string;
+  };
+  currentBid?: number;
+}
+
+export interface ManufacturerRef {
+  id: string;
+  userId: string;
+  name: string;
+  location: string;
+  established: number;
+  description: string;
+  manufacturerUrl: string;
+}

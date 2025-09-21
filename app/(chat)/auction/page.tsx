@@ -21,7 +21,8 @@ export default function AuctionListPage() {
     const fetchData = async () => {
       const res = await fetch('/api/auction');
       const data = await res.json();
-      setItems(data);
+      console.log(data.data);
+      setItems(data.data);
     };
     fetchData();
   }, []);
@@ -50,21 +51,25 @@ export default function AuctionListPage() {
           // top: '64px',
         }}
       >
-        {items.map((item) => (
-          <Link
-            key={item.id}
-            href={`/auction/${item.id}`}
-            style={{ textDecoration: 'none', justifySelf: 'center' }}
-          >
-            <AuctionCard
-              imageUrl={item.imageUrl}
-              price={item.price}
-              name={item.name}
-              description={item.description}
-              manufacturer={item.manufacturer}
-            />
-          </Link>
-        ))}
+        {items.length > 0 ? (
+          items?.map((item) => (
+            <Link
+              key={item.id}
+              href={`/auction/${item.id}`}
+              style={{ textDecoration: 'none', justifySelf: 'center' }}
+            >
+              <AuctionCard
+                imageUrl={item.imageUrl}
+                price={item.price}
+                name={item.name}
+                description={item.description}
+                manufacturer={item.manufacturer}
+              />
+            </Link>
+          ))
+        ) : (
+          <h1>No auction items found</h1>
+        )}
       </div>
     </div>
   );

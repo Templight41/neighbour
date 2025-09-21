@@ -51,7 +51,7 @@ export default function AppHeader({ style }: { style: React.CSSProperties }) {
 
       {/* Right Container with Profile Icon */}
       <div className="flex items-center gap-4">
-        <Link href="/">
+        <Link href="/profile">
           <button
             type="button"
             className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-border bg-secondary text-secondary-foreground transition-all duration-200 hover:scale-105 hover:bg-accent hover:text-accent-foreground"
