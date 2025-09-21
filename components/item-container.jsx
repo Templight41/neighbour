@@ -52,6 +52,7 @@ const ItemContainer = ({name, manufacturer, imageUrl, price, currentBid, timeFor
     {Array.isArray(imageUrl) && imageUrl.length > 1 && (
       <>
         <button 
+          type="button"
           onClick={prevImage}
           style={{
             position: 'absolute',
@@ -72,6 +73,7 @@ const ItemContainer = ({name, manufacturer, imageUrl, price, currentBid, timeFor
         </button>
         
         <button 
+          type="button"
           onClick={nextImage}
           style={{
             position: 'absolute',

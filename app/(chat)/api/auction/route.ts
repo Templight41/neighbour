@@ -1,18 +1,4 @@
 import { type NextRequest, NextResponse } from 'next/server';
-import app from '@/lib/db/firestore';
-import {
-  addDoc,
-  collection,
-  getDocs,
-  getDoc,
-  getFirestore,
-  writeBatch,
-  doc,
-  limit,
-  startAfter,
-  orderBy,
-  query,
-} from 'firebase/firestore';
 import {
   createItem,
   createMultipleItems,

@@ -187,9 +187,10 @@ export async function getAuctionBids(itemId: string) {
 export async function createAuctionBid(itemId: string, bid: AuctionBidRef) {
   try {
     const db = getFirestore(app);
-    const bidDoc = await addDoc(collection(db, 'auction_bid', itemId), bid);
+    const bidDoc = await addDoc(collection(db, 'auction_bid'), bid);
     return bidDoc.id as string;
   } catch (error) {
+    console.error('Error creating auction bid:', error);
     return null;
   }
 }
@@ -197,6 +198,7 @@ export async function createAuctionBid(itemId: string, bid: AuctionBidRef) {
 export async function getAuctionHighestBid(itemId: string) {
   try {
     const db = getFirestore(app);
+    console.log(itemId);
     const q = query(
       collection(db, 'auction_bid'),
       where('itemId', '==', itemId),
@@ -204,6 +206,7 @@ export async function getAuctionHighestBid(itemId: string) {
       limit(1),
     );
     const bidsSnapshot = await getDocs(q);
+    console.log(bidsSnapshot);
     if (bidsSnapshot.empty) {
       return 0;
     }
@@ -212,6 +215,7 @@ export async function getAuctionHighestBid(itemId: string) {
     }, 0);
     return highestBid;
   } catch (error) {
+    console.error('Error getting auction highest bid:', error);
     return null;
   }
 }

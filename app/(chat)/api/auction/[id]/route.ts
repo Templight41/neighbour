@@ -1,5 +1,6 @@
 import app from '@/lib/db/firestore';
 import {
+  createAuctionBid,
   getAuctionHighestBid,
   getItemById,
   getManufacturerById,
@@ -14,6 +15,7 @@ import {
 import { NextResponse } from 'next/server';
 import { auth } from '@/app/(auth)/auth';
 import type { AuctionItemRef } from '@/lib/db/schema';
+import { v4 as uuidv4 } from 'uuid';
 
 // TypeScript interfaces for type safety
 interface AuctionItem {
@@ -104,6 +106,8 @@ export async function GET(
       getAuctionHighestBid(id),
     ]);
 
+    console.log(highestBid);
+
     if (!item) {
       return NextResponse.json(
         { error: 'Auction item not found', success: false },
@@ -166,14 +170,14 @@ export async function GET(
   }
 }
 
-export async function PUT(
+export async function POST(
   request: Request,
   context: { params: Promise<{ id: string }> },
 ) {
-  // const session = await auth();
-  // if (!session) {
-  //   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  // }
+  const session = await auth();
+  if (!session) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
   try {
     const { id } = await context.params;
@@ -192,26 +196,28 @@ export async function PUT(
         { status: 400 },
       );
     }
-
-    const db = getFirestore(app);
-    const docRef = doc(db, 'auction', id);
-    const timestamp = new Date().toISOString();
-
-    // For PUT, we replace the entire document
-    const itemToSet: Omit<AuctionItem, 'id'> = {
-      ...body,
-      updatedAt: timestamp,
+    const itemToSet = {
+      id: uuidv4(),
+      itemId: id,
+      bid: body.newBid,
+      userId: session.user.id,
+      createdAt: new Date().toISOString(),
     };
+    const bid = await createAuctionBid(id, itemToSet);
 
-    await setDoc(docRef, itemToSet);
+    if (!bid) {
+      return NextResponse.json(
+        { error: 'Failed to create auction bid', success: false },
+        { status: 500 },
+      );
+    }
 
     return NextResponse.json({
       success: true,
       data: {
-        id,
         ...itemToSet,
       },
-      message: 'Auction item updated successfully',
+      message: 'Auction bid created successfully',
     });
   } catch (error) {
     console.error('Error updating auction item:', error);
