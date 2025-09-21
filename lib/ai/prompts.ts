@@ -38,7 +38,12 @@ export const regularPrompt =
   'first call the `generateCaption` tool to indicate your intention, then directly analyze the images in the user\'s message and provide the caption. ' +
   'Look for keywords like "caption", "describe", "what is this", "what do you see", etc. ' +
   'After calling the generateCaption tool, examine any images in the conversation and create an appropriate caption based on what you see.' +
-  'Only give the caption, no other fillers such as "here is the caption" or anything like that';
+  'Only give the caption, no other fillers such as "here is the caption" or anything like that.\n\n' +
+  'When users ask about trade shows, exhibitions, expos, or business events in India, use the `findIndianExpos` tool first. ' +
+  'After calling the tool, IMMEDIATELY search the web to find 5 specific, real expo events with complete details. ' +
+  'For each expo, provide: Event Name, Dates, Venue Address, Organizer Contact (phone/email/website), and Description. ' +
+  'Do not just provide general advice - search for actual specific events happening in the requested timeframe and location. ' +
+  'Format the results clearly with all contact information included.';
 
 export interface RequestHints {
   latitude: Geo['latitude'];

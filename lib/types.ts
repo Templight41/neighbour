@@ -4,6 +4,7 @@ import type { createDocument } from './ai/tools/create-document';
 import type { updateDocument } from './ai/tools/update-document';
 import type { requestSuggestions } from './ai/tools/request-suggestions';
 import type { generateCaption } from './ai/tools/generate-caption';
+import type { findIndianExpos } from './ai/tools/find-indian-expos';
 import type { InferUITool, UIMessage } from 'ai';
 import type { AppUsage } from './usage';
 
@@ -25,6 +26,7 @@ type requestSuggestionsTool = InferUITool<
   ReturnType<typeof requestSuggestions>
 >;
 type generateCaptionTool = InferUITool<typeof generateCaption>;
+type findIndianExposTool = InferUITool<typeof findIndianExpos>;
 
 export type ChatTools = {
   getWeather: weatherTool;
@@ -32,6 +34,7 @@ export type ChatTools = {
   updateDocument: updateDocumentTool;
   requestSuggestions: requestSuggestionsTool;
   generateCaption: generateCaptionTool;
+  findIndianExpos: findIndianExposTool;
 };
 
 export type CustomUIDataTypes = {

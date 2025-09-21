@@ -25,6 +25,8 @@ import { updateDocument } from '@/lib/ai/tools/update-document';
 import { requestSuggestions } from '@/lib/ai/tools/request-suggestions';
 import { getWeather } from '@/lib/ai/tools/get-weather';
 import { generateCaption } from '@/lib/ai/tools/generate-caption';
+import { findIndianExpos } from '@/lib/ai/tools/find-indian-expos';
+import { google } from '@ai-sdk/google';
 import { isProductionEnvironment } from '@/lib/constants';
 import { myProvider } from '@/lib/ai/providers';
 import { entitlementsByUserType } from '@/lib/ai/entitlements';
@@ -190,6 +192,7 @@ export async function POST(request: Request) {
                   'updateDocument',
                   'requestSuggestions',
                   'generateCaption',
+                  'findIndianExpos',
                 ],
           experimental_transform: smoothStream({ chunking: 'word' }),
           tools: {
@@ -201,6 +204,7 @@ export async function POST(request: Request) {
               dataStream,
             }),
             generateCaption,
+            findIndianExpos,
           },
           experimental_telemetry: {
             isEnabled: isProductionEnvironment,
