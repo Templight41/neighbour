@@ -47,6 +47,7 @@ import type { ModelCatalog } from 'tokenlens/core';
 import type { AppUsage } from '@/lib/usage';
 import { getManufacturerByUserId } from '@/lib/db/firestore-queries';
 import { getManufacturer, setManufacturer } from '@/lib/ai/tools/manufacturer';
+import { getItem, getUserItems, createItem } from '@/lib/ai/tools/item';
 
 export const maxDuration = 60;
 
@@ -220,8 +221,11 @@ export async function POST(request: Request) {
                     'findIndianExpos',
                     'setManufacturer',
                     'getManufacturer',
+                    'createItem',
+                    'getItem',
+                    'getUserItems',
                   ]
-                : ['setManufacturer', 'getManufacturer'],
+                : ['setManufacturer'],
           experimental_transform: smoothStream({ chunking: 'word' }),
           tools: isUserInfoLogged
             ? {
@@ -230,6 +234,9 @@ export async function POST(request: Request) {
                 findIndianExpos,
                 setManufacturer,
                 getManufacturer,
+                createItem,
+                getItem,
+                getUserItems,
               }
             : {
                 setManufacturer,

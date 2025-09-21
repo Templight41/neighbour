@@ -32,6 +32,26 @@ export async function getItems() {
   }
 }
 
+export async function getItemsByUserId(userId: string) {
+  try {
+    const db = getFirestore(app);
+    const q = query(
+      collection(db, 'item'),
+      where('manufacturerId', '==', userId),
+    );
+    const itemsSnapshot = await getDocs(q);
+
+    if (itemsSnapshot.empty) {
+      return [];
+    }
+
+    // Return the first matching manufacturer
+    return itemsSnapshot.docs.map((doc) => doc.data()) as ItemResRef[];
+  } catch (error) {
+    return null;
+  }
+}
+
 export async function getItemsByLimit(
   limitCount: number,
   startAfterDoc: string | null,

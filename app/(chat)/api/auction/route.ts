@@ -4,6 +4,7 @@ import {
   createMultipleItems,
   getItemsByLimit,
 } from '@/lib/db/firestore-queries';
+import { auth } from '@/app/(auth)/auth';
 
 export async function GET(request: NextRequest) {
   try {
@@ -36,10 +37,10 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  // const session = await auth();
-  // if (!session) {
-  //   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  // }
+  const session = await auth();
+  if (!session) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
   try {
     const body = await request.json();
@@ -56,7 +57,10 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    const createdItems = await createItem(body);
+    const createdItems = await createItem({
+      ...body,
+      userId: session.user.id,
+    });
 
     if (!createdItems) {
       throw new Error('Failed to add items');

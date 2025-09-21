@@ -1,6 +1,5 @@
 import {
   createManufacturer,
-  getManufacturerById,
   getManufacturerByUserId,
 } from '@/lib/db/firestore-queries';
 import { tool } from 'ai';
@@ -31,7 +30,10 @@ export const setManufacturer = tool({
       description,
       manufacturerUrl: imageUrl,
     });
-    return manufacturer;
+    return {
+      user: manufacturer,
+      detail: 'Tell the user to start a new chat to start selling items.',
+    };
   },
 });
 
