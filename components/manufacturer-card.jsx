@@ -12,7 +12,7 @@ const ManufacturerContainer = ({manufacturerDetails, manufacturerUrl, manufactur
           <h1>About the Manufacturer</h1>
           <h2>{manufacturer || 'N/A'}</h2>
           <h3>{manufacturerDetails?.location || 'N/A'}</h3>
-          <h3>Established: {manufacturerDetails?.established || 'N/A'}</h3>
+          {/* <h3>Established: {manufacturerDetails?.established || 'N/A'}</h3> */}
           <h4>{manufacturerDetails?.description || 'N/A'}</h4>
         </div>
       </article>

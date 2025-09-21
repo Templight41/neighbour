@@ -28,13 +28,13 @@ export async function middleware(request: NextRequest) {
   });
 
   // Guest route is not used anymore
-  // if (!token) {
-  //   const redirectUrl = encodeURIComponent(request.url);
+  if (!token) {
+    const redirectUrl = encodeURIComponent(request.url);
 
-  //   return NextResponse.redirect(
-  //     new URL(`/api/auth/guest?redirectUrl=${redirectUrl}`, request.url),
-  //   );
-  // }
+    return NextResponse.redirect(
+      new URL(`/api/auth/guest?redirectUrl=${redirectUrl}`, request.url),
+    );
+  }
 
   const isGuest = guestRegex.test(token?.email ?? '');
 

@@ -4,14 +4,9 @@ import {
   getAuctionHighestBid,
   getItemById,
   getManufacturerById,
+  getManufacturerByUserId,
 } from '@/lib/db/firestore-queries';
-import {
-  doc,
-  getDoc,
-  getFirestore,
-  setDoc,
-  updateDoc,
-} from 'firebase/firestore';
+import { doc, getDoc, getFirestore, updateDoc } from 'firebase/firestore';
 import { NextResponse } from 'next/server';
 import { auth } from '@/app/(auth)/auth';
 import type { AuctionItemRef } from '@/lib/db/schema';
@@ -101,9 +96,10 @@ export async function GET(
     // const item = await getItemById(id);
     // const highestBid = await getAuctionHighestBid(id);
 
-    const [item, highestBid] = await Promise.all([
+    const [item, highestBid, manufacturer] = await Promise.all([
       getItemById(id),
       getAuctionHighestBid(id),
+      getManufacturerByUserId(session.user.id),
     ]);
 
     console.log(highestBid);
@@ -115,14 +111,13 @@ export async function GET(
       );
     }
 
-    const manufacturer = await getManufacturerById(item.manufacturerId);
-    // if (!manufacturer) {
-    //   console.log('Manufacturer not found');
-    //   return NextResponse.json(
-    //     { error: 'Manufacturer not found', success: false },
-    //     { status: 404 },
-    //   );
-    // }
+    if (!manufacturer) {
+      console.log('Manufacturer not found');
+      return NextResponse.json(
+        { error: 'Manufacturer not found', success: false },
+        { status: 404 },
+      );
+    }
 
     result = {
       ...item,
@@ -135,11 +130,11 @@ export async function GET(
       createdAt: item?.createdAt,
       updatedAt: item?.updatedAt,
       manufacturerDetails: {
-        manufacturer: manufacturer?.name ?? '',
-        location: manufacturer?.location ?? '',
-        established: manufacturer?.established ?? 0,
-        description: manufacturer?.description ?? '',
-        manufacturerUrl: manufacturer?.manufacturerUrl ?? '',
+        manufacturer: manufacturer.name || '',
+        location: manufacturer.location || '',
+        established: manufacturer.established || 0,
+        description: manufacturer.description || '',
+        manufacturerUrl: manufacturer.manufacturerUrl || '',
       },
       currentBid: highestBid || item?.price || 0,
     };

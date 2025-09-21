@@ -1,9 +1,7 @@
 'use client';
 
-import HeaderBar from '@/components/header';
 import ItemContainer from '@/components/item-container';
 import ManufacturerContainer from '@/components/manufacturer-card';
-import RaiseBidButton from '@/components/raise-bid-button';
 import { useState, useEffect, use } from 'react';
 
 type AuctionItem = {
@@ -14,13 +12,13 @@ type AuctionItem = {
   description?: string;
   currentBid?: number;
   timeForEnd?: string;
-  manufacturer?: string;
   manufacturerDetails?: {
+    manufacturer?: string;
     location: string;
     established: number;
     description: string;
+    manufacturerUrl?: string;
   };
-  manufacturerUrl?: string;
 };
 
 type AuctionDetailPageProps = {
@@ -56,7 +54,7 @@ export default function AuctionDetailPage({ params }: AuctionDetailPageProps) {
         {/* <HeaderBar title="The Hello Neighbour Auction" /> */}
         <ItemContainer
           name={item?.name}
-          manufacturer={item?.manufacturer}
+          manufacturer={item?.manufacturerDetails?.manufacturer}
           imageUrl={item?.imageUrl}
           price={item?.price}
           currentBid={item?.currentBid}
@@ -98,8 +96,8 @@ export default function AuctionDetailPage({ params }: AuctionDetailPageProps) {
 
         <ManufacturerContainer
           manufacturerDetails={item?.manufacturerDetails}
-          manufacturerUrl={item?.manufacturerUrl}
-          manufacturer={item?.manufacturer}
+          manufacturerUrl={item?.manufacturerDetails?.manufacturerUrl}
+          manufacturer={item?.manufacturerDetails?.manufacturer}
         />
 
         {/* <RaiseBidButton currentBid={item?.currentBid?.toString() || '0'} /> */}
